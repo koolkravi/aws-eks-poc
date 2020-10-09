@@ -8,8 +8,7 @@
   ```
   CloudFormation Template: 
   0_cloudFormation_amazon-eks-vpc-private-subnets.yaml
-  ```
-  
+  ```  
 - Create ECR Repository and authenticate Docker
 
   Repository name : **spring-boot-postgres-poc**
@@ -17,8 +16,7 @@
   update script placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and Execute below script
   ```
   ./1-infra-creation/5_ecr-springboot-angular.sh
-  ```
-  
+  ```  
 ## High Level Tasks
 - Step A : Create EKS Cluster using Cloud formation - Infrastructure
   - Step 1: Create IAM role for EKS Cluster  
@@ -28,10 +26,17 @@
   - Step 4: Create Worker nodes
 - Step C : Deploy POC application using kubernetes manifest 
   - Step 5: Deploy PostgreSQL DB cluster into EKS
+    - Step 5.1: Execute kubernetes manifest
+    - Step 5.2: Create a config map with the hostname of Postgres    
   - Step 6: Deploy Spring Boot Application into EKS
+    - Step 6.1. Build Spring boot docker image, push to ECR and Deploy to EKS    
   - Step 7: Deploy frontend(Angular) into EKS
+    - Step 7.1. Build Angular docker image, push to ECR and Deploy to EKS
+  - Step 8 Clean up
+    - Step 8.1: undeploy angular, spring boot and postgres
+    - Step 8.2: Delete eks infrastructure (cloudformation stacks)
+```
   
-
 ## Step A: Create EKS Cluster using Cloud formation - Infrastructure
 
 ### Step 1: Create IAM role for EKS Cluster 
@@ -87,9 +92,10 @@ kubectl get nodes -o wide
 
 ### Step 5: Deploy PostgreSQL DB cluster into EKS
 
-- Step 5.1: Execute below kubernetes manifest
+- Step 5.1: Execute kubernetes manifest
   Service Name	: **postgres**
   ```
+  cd aws-eks-demo
   kubectl create -f 2-deploy-poc-application/1-db/postgres.yaml
   ```
 -  Step 5.2: Create a config map with the hostname of Postgres
@@ -107,6 +113,7 @@ kubectl get nodes -o wide
   - [x] **update spring-boot-app.yaml placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and Execute below script**
   
   ```
+  cd aws-eks-demo
   ./2-deploy-poc-application/2-backend-springboot/6_backend-springboot-build-push-to-ecr.sh  
   ```
 
@@ -131,6 +138,7 @@ API http://<External IP Address>:8080/api/v2/employees
   - [x] **update angular-app.yaml placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and Execute below script**
 
   ```
+  cd aws-eks-demo
   ./2-deploy-poc-application/3-frontend-angular/7_front-angular-build-push-to-ecr.sh
   ```
 
@@ -138,6 +146,20 @@ API http://<External IP Address>:8080/api/v2/employees
 ```
 kubectl get svc eks-angular-poc-loadbalancer
 http://<External IP Address>
+```
+### Step 8 Clean up
+- Step 8.1: undeploy angular, spring boot and postgres
+```
+cd aws-eks-demo
+./2-deploy-poc-application/undeploy_poc_app.sh
+```
+- Step 8.2: Delete eks infrastructure (cloudformation stacks)
+```
+eks-worker-node-group
+eksWorkerNodeGroupRole
+eks-cluster
+eksClusterRole
+eks-vpc
 ```
 
 ## Reference
@@ -164,5 +186,11 @@ http://<External IP Address>
   echo "${POD}"
   kubectl  logs "${POD}"
 
+  aws cloudformation delete-stack --stack-name <my-vpc-stack>
+  
   kubectl scale deployment spring-boot-postgres-poc --replicas=3
+  ```
+- Links
+  ```
+  https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html
   ```
