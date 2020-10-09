@@ -1,7 +1,6 @@
 # AWS EKS Infrastructure creation using Cloud formation and POC Application Deployment
 
 ## Pre-requisite:
-
 - Create Dedicated VPC for the EKS Cluster
 
   Stack name 		: **eks-vpc** 
@@ -17,6 +16,7 @@
   ```
   ./1-infra-creation/5_ecr-springboot-angular.sh
   ```  
+
 ## High Level Tasks
 - Step A : Create EKS Cluster using Cloud formation - Infrastructure
   - Step 1: Create IAM role for EKS Cluster  
@@ -32,10 +32,10 @@
     - Step 6.1. Build Spring boot docker image, push to ECR and Deploy to EKS    
   - Step 7: Deploy frontend(Angular) into EKS
     - Step 7.1. Build Angular docker image, push to ECR and Deploy to EKS
-  - Step 8 Clean up
-    - Step 8.1: undeploy angular, spring boot and postgres
-    - Step 8.2: Delete eks infrastructure (cloudformation stacks)
-```
+- Step D : Delete Resouces
+    - Step 8: Delete Infra and deployed application
+      - Step 8.1: undeploy angular, spring boot and postgres
+      - Step 8.2: Delete eks infrastructure (cloudformation stacks)
   
 ## Step A: Create EKS Cluster using Cloud formation - Infrastructure
 
@@ -147,22 +147,25 @@ API http://<External IP Address>:8080/api/v2/employees
 kubectl get svc eks-angular-poc-loadbalancer
 http://<External IP Address>
 ```
-### Step 8 Clean up
-- Step 8.1: undeploy angular, spring boot and postgres
-```
-cd aws-eks-demo
-./2-deploy-poc-application/undeploy_poc_app.sh
-```
-- Step 8.2: Delete eks infrastructure (cloudformation stacks)
-```
-eks-worker-node-group
-eksWorkerNodeGroupRole
-eks-cluster
-eksClusterRole
-eks-vpc
-```
+      
+## Step D : Delete Resouces
 
-## Reference
+### Step 8: Delete Infra and deployed application
+- Step 8.1: undeploy angular, spring boot and postgres
+	```
+	cd aws-eks-demo
+	./2-deploy-poc-application/undeploy_poc_app.sh
+	```
+- Step 8.2: Delete eks infrastructure (cloudformation stacks)
+	```
+	eks-worker-node-group
+	eksWorkerNodeGroupRole
+	eks-cluster
+	eksClusterRole
+	eks-vpc
+	```
+	
+## References
 - Set up 
   ```
   Install docker desktop, install aws cli, install kubectl, install iam authenticator (not needed), insall eksctl
