@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-postgres-poc
-        image: XXXXXXXXXXXX.dkr.ecr.us-west-2.amazonaws.com/spring-boot-postgres-poc:v0.0.10
+        image: XXXXXXXXXXXX.dkr.ecr.us-west-2.amazonaws.com/spring-boot-postgres-poc:v0.0.1
         ports:
         - containerPort: 8080
         env:
