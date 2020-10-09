@@ -16,7 +16,7 @@
   Repository name : **eks-angular-poc**
   update script placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and Execute below script
   ```
-  ./resources/5_ecr-springboot-angular.sh
+  ./1-infra-creation/5_ecr-springboot-angular.sh
   ```
   
 ## High Level Tasks
@@ -90,7 +90,7 @@ kubectl get nodes -o wide
 - Step 5.1: Execute below kubernetes manifest
   Service Name	: **postgres**
   ```
-  kubectl create -f resources/postgres.yaml
+  kubectl create -f 2-deploy-poc-application/1-db/postgres.yaml
   ```
 -  Step 5.2: Create a config map with the hostname of Postgres
   This config map will be used in Spring Boot Application as part of JDBC connection URL
@@ -103,9 +103,11 @@ kubectl get nodes -o wide
 - Step 6.1. Build Spring boot docker image, push to ECR and Deploy to EKS
 
   Service Name	: **spring-boot-postgres-poc**
-  update script placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and Execute below script
+  - [x] **update script placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and**
+  - [x] **update spring-boot-app.yaml placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and Execute below script**
+  
   ```
-  6_backend-springboot-build-push-to-ecr.sh
+  ./2-deploy-poc-application/2-backend-springboot/6_backend-springboot-build-push-to-ecr.sh  
   ```
 
 **Test**
@@ -124,10 +126,12 @@ API http://<External IP Address>:8080/api/v2/employees
 
   Service Name	: **eks-angular-poc-loadbalancer**
   importtant files **custom-nginx.conf** and *Dockerfile*
-  update script placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and Execute below script
+  
+  - [x] **update script placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and**
+  - [x] **update angular-app.yaml placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and Execute below script**
 
   ```
-  7_front-angular-build-push-to-ecr.sh
+  ./2-deploy-poc-application/3-frontend-angular/7_front-angular-build-push-to-ecr.sh
   ```
 
 **Test**
@@ -137,6 +141,30 @@ http://<External IP Address>
 ```
 
 # Reference
+## Set up 
 ```
+Install docker desktop, install aws cli, install kubectl, install iam authenticator (not needed), insall eksctl
+```
+
+## Commands
+```
+
+kubectl exec -it postgres-statefulset-0 -- /bin/bash
+#psql -U Username DatabaseName 
+psql -U admin pocdb
+
+\connect database_name
+\l 	: list all databases
+\dt : : list all tables in the current database
+\d  table name : describe table
+
+$ kubectl get deploy
+$ kubectl get svc
+$ kubectl get pod
+
+POD=$(kubectl get pods -l app=spring-boot-postgres-poc | grep 0/1 | awk '{print $1}')
+echo "${POD}"
+kubectl  logs "${POD}"
+
 kubectl scale deployment spring-boot-postgres-poc --replicas=3
 ```
