@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-postgres-poc
+  labels:
+    app: spring-boot-postgres-poc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-postgres-poc
+  template:
+    metadata:
+      labels:
+        app: spring-boot-postgres-poc
+    spec:
+      containers:
+      - name: spring-boot-postgres-poc
+        image: XXXXXXXXXXXX.dkr.ecr.us-west-2.amazonaws.com/spring-boot-postgres-poc:v0.0.10
+        ports:
+        - containerPort: 8080
+        env:
+          - name: POSTGRES_DB
+            valueFrom:
+              configMapKeyRef:
+                name: postgres-config
+                key: POSTGRES_DB        
+          - name: POSTGRES_USER
+            valueFrom:
+              configMapKeyRef:
+                name: postgres-config
+                key: POSTGRES_USER
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: postgres-config
+                key: POSTGRES_PASSWORD
+          - name: POSTGRES_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: hostname-config
+                key: postgres_host		
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-postgres-poc
+  labels:
+    app: spring-boot-postgres-poc
+spec:
+  selector:
+    app: spring-boot-postgres-poc
+  ports:
+    - name: http
+      port: 8080
+  type: LoadBalancer 
