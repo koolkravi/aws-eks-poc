@@ -140,31 +140,29 @@ kubectl get svc eks-angular-poc-loadbalancer
 http://<External IP Address>
 ```
 
-# Reference
-## Set up 
-```
-Install docker desktop, install aws cli, install kubectl, install iam authenticator (not needed), insall eksctl
-```
+## Reference
+- Set up 
+  ```
+  Install docker desktop, install aws cli, install kubectl, install iam authenticator (not needed), insall eksctl
+  ```
+- Commands
+  ```
+  kubectl exec -it postgres-statefulset-0 -- /bin/bash
+  #psql -U Username DatabaseName 
+  psql -U admin pocdb
 
-## Commands
-```
+  \connect database_name
+  \l 	: list all databases
+  \dt : : list all tables in the current database
+  \d  table name : describe table
 
-kubectl exec -it postgres-statefulset-0 -- /bin/bash
-#psql -U Username DatabaseName 
-psql -U admin pocdb
+  $ kubectl get deploy
+  $ kubectl get svc
+  $ kubectl get pod
 
-\connect database_name
-\l 	: list all databases
-\dt : : list all tables in the current database
-\d  table name : describe table
+  POD=$(kubectl get pods -l app=spring-boot-postgres-poc | grep 0/1 | awk '{print $1}')
+  echo "${POD}"
+  kubectl  logs "${POD}"
 
-$ kubectl get deploy
-$ kubectl get svc
-$ kubectl get pod
-
-POD=$(kubectl get pods -l app=spring-boot-postgres-poc | grep 0/1 | awk '{print $1}')
-echo "${POD}"
-kubectl  logs "${POD}"
-
-kubectl scale deployment spring-boot-postgres-poc --replicas=3
-```
+  kubectl scale deployment spring-boot-postgres-poc --replicas=3
+  ```
