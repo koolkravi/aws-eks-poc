@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "eks-demo"
+    }
+  },
+  "defaultProject": "eks-demo",
+  "cli": {
+    "analytics": "9973fd64-264b-4a16-9f27-8f65eabe7e6c"
+  }
 }

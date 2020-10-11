@@ -1,7 +1,5 @@
 package com.mycom.poc.eksdemo.controller.v2;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,28 +32,24 @@ public class EmployeeController {
 		return new ResponseEntity<>(employeeService.findAll(), HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/employees/{id}")
-	public ResponseEntity<Object> getEmployeeById(@PathVariable Long id) {
-		Optional<Employee> employee = employeeService.findByID(id);
-		return new ResponseEntity<>(employee, HttpStatus.OK);
-	}
-
 	@PostMapping("/employees")
 	public ResponseEntity<Object> createEmployee(@RequestBody EmployeeDTO employee) {
-		employeeService.save(employee);
-		return new ResponseEntity<>("Employee is created successfully", HttpStatus.CREATED);
+		return new ResponseEntity<>(employeeService.save(employee), HttpStatus.CREATED);
+	}
+
+	@GetMapping(value = "/employees/{id}")
+	public ResponseEntity<Object> getEmployeeById(@PathVariable Long id) {
+		Employee employee = employeeService.findByID(id);
+		return new ResponseEntity<>(employee, HttpStatus.OK);
 	}
 
 	@PutMapping("/employees/{id}")
 	public ResponseEntity<Object> updateEmployee(@PathVariable("id") Long id, @RequestBody EmployeeDTO employee) {
-		employeeService.update(id, employee);
-		return new ResponseEntity<>("Employee is updated successsfully", HttpStatus.OK);
+		return new ResponseEntity<>(employeeService.update(id, employee), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/employees/{id}")
-	public ResponseEntity<Object> deleteEmployee(@PathVariable("id") Long id) {
-
+	public void deleteEmployee(@PathVariable("id") Long id) {
 		employeeService.delete(id);
-		return new ResponseEntity<>("Employee is deleted successsfully", HttpStatus.OK);
 	}
 }
