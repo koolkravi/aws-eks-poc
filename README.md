@@ -21,7 +21,7 @@
 - Step A : Create EKS Cluster using Cloud formation - Infrastructure
   - Step 1: Create IAM role for EKS Cluster  
   - Step 2: Create EKS Cluster
-- Step B : Create EKS Worker Nodes using kubernetes manifest - Infrastructure
+- Step B : Create EKS Worker Nodes using Cloud formation - Infrastructure
   - Step 3: Create IAM Role for EKS Worker Nodes
   - Step 4: Create Worker nodes
 - Step C : Deploy POC application using kubernetes manifest 
@@ -64,7 +64,7 @@ aws  eks --region us-west-2 update-kubeconfig --name eks-cluster
 kubectl get svc
 ```
 
-## Step B : Create EKS Worker Nodes using kubernetes manifest - Infrastructure
+## Step B : Create EKS Worker Nodes using Cloud formation - Infrastructure
 
 ### Step 3: Create IAM Role for EKS Worker Nodes
 Stack name 		: **eksWorkerNodeGroupRole** 
