@@ -200,12 +200,12 @@ http://<External IP Address>
   ```
 
 ## Next Steps
-### Automate Deployment of POC application on EKS Cluster using Jenkins and kubectl
-### Automate Deployment of POC application on EKS Cluster using AWS Code Commit, S2 and Lamda
-### Automate Deployment of POC application on EKS Cluster using AWS Lamda fuction
-### Automate Deployment of POC application on EKS Cluster using Ansible
-### Automate Deployment of POC application on EKS Cluster using Terraform
+-  #1. Automate Deployment of POC application on EKS Cluster using Jenkins and kubectl
+-  #2. Automate Deployment of POC application on EKS Cluster using AWS Code Commit, S2 and Lamda
+-  #3. Automate Deployment of POC application on EKS Cluster using AWS Lamda fuction
+-  #4. Automate Deployment of POC application on EKS Cluster using Ansible
+-  #5. Automate Deployment of POC application on EKS Cluster using Terraform
 
-### Kubernetes Infrastructure creation and POC Application Deployment on AZURE AKS
-### Kubernetes Infrastructure creation and POC Application Deployment on Google Cloud
+-  #6. Kubernetes Infrastructure creation and POC Application Deployment on AZURE AKS
+-  #7. Kubernetes Infrastructure creation and POC Application Deployment on Google Cloud
 
