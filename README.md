@@ -51,14 +51,14 @@ CloudFormation Template:
 Stack name 		: **eks-cluster** 
 Cluster name 	: **eks-cluster**
 
-**Note: Get parameters values from output of cloud formation stack created above ( Pre-requisite: eks-vpc and Step 1: eksClusterRole stack)**
+ - [x] **Note: Get parameters values from output of cloud formation stack created above ( Pre-requisite: eks-vpc and Step 1: eksClusterRole stack)**
 ```
 CloudFormation Template:  
 2_cloudFormation_ekscluster.yaml
 ```
 
 **Test Cluster**
-Note : install aws cli and install kubectl on your local machine
+ - [x] Note : install aws cli and install kubectl on your local machine
 ```
 aws  eks --region us-west-2 update-kubeconfig --name eks-cluster
 kubectl get svc
@@ -197,3 +197,14 @@ http://<External IP Address>
   ```
   https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html
   ```
+
+## Next Steps
+### Automate Deployment of POC application on EKS Cluster using Jenkins and kubectl
+### Automate Deployment of POC application on EKS Cluster using AWS Code Commit, S2 and Lamda
+### Automate Deployment of POC application on EKS Cluster using AWS Lamda fuction
+### Automate Deployment of POC application on EKS Cluster using Ansible
+### Automate Deployment of POC application on EKS Cluster using Terraform
+
+### Kubernetes Infrastructure creation and POC Application Deployment on AZURE AKS
+### Kubernetes Infrastructure creation and POC Application Deployment on Google Cloud
+

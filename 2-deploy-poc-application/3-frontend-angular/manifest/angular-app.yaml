@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: eks-angular-poc
-        image: 770239628917.dkr.ecr.us-west-2.amazonaws.com/eks-angular-poc:v0.0.1
+        image: XXXXXXXXXXXX.dkr.ecr.us-west-2.amazonaws.com/eks-angular-poc:v0.0.1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
