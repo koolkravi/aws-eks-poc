@@ -4,12 +4,13 @@ cd 2-deploy-poc-application/3-frontend-angular
 
 VERSION=v0.0.1
 AWS_ACCOUNT_ID=XXXXXXXXXXXX
+REPO_ANGULAR=eks-angular-poc
 
 # Step 2: Create Docker Image
-docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/eks-angular-poc:$VERSION .
+docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$REPO_ANGULAR:$VERSION .
 
 # Step 3: Push Image to ECR repository
-docker push  $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/eks-angular-poc:$VERSION
+docker push  $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$REPO_ANGULAR:$VERSION
 
 # Step 4: Deploy application to EKS 
 kubectl apply -f manifest/angular-app.yaml

@@ -1,5 +1,8 @@
 #!/bin/sh
 
+REPO_SPRING_BOOT=eks-springboot-poc
+REPO_ANGULAR=eks-angular-poc
+
 # Step 1: Delete Angular
 cd 2-deploy-poc-application/3-frontend-angular
 kubectl delete -f manifest/angular-app.yaml
@@ -20,10 +23,10 @@ cd ../..
 
 # Step 5: Delete ECR
 aws ecr delete-repository \
-    --repository-name  eks-angular-poc \
+    --repository-name  $REPO_ANGULAR \
     --force
 aws ecr delete-repository \
-    --repository-name  spring-boot-postgres-poc \
+    --repository-name  $REPO_SPRING_BOOT \
     --force
 
 

@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-boot-postgres-poc
+  name: eks-springboot-poc
   labels:
-    app: spring-boot-postgres-poc
+    app: eks-springboot-poc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: spring-boot-postgres-poc
+      app: eks-springboot-poc
   template:
     metadata:
       labels:
-        app: spring-boot-postgres-poc
+        app: eks-springboot-poc
     spec:
       containers:
-      - name: spring-boot-postgres-poc
-        image: XXXXXXXXXXXX.dkr.ecr.us-west-2.amazonaws.com/spring-boot-postgres-poc:v0.0.1
+      - name: eks-springboot-poc
+        image: XXXXXXXXXXXX.dkr.ecr.us-west-2.amazonaws.com/eks-springboot-poc:v0.0.1
         ports:
         - containerPort: 8080
         env:
@@ -46,12 +46,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: spring-boot-postgres-poc
+  name: eks-springboot-poc
   labels:
-    app: spring-boot-postgres-poc
+    app: eks-springboot-poc
 spec:
   selector:
-    app: spring-boot-postgres-poc
+    app: eks-springboot-poc
   ports:
     - name: http
       port: 8080

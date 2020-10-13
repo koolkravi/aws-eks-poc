@@ -1,15 +1,18 @@
 #!/bin/sh
 
 AWS_ACCOUNT_ID=XXXXXXXXXXXX
+REPO_SPRING_BOOT=eks-springboot-poc
+REPO_ANGULAR=eks-angular-poc
+
 # Step 1:ECR Repository for spring boot appication 
 aws ecr create-repository \
-     --repository-name  spring-boot-postgres-poc \
+     --repository-name  $REPO_SPRING_BOOT \
      --region us-west-2
 
 aws ecr get-login-password \
      --region us-west-2 | docker login \
      --username AWS \
-     --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/spring-boot-postgres-poc
+     --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$REPO_SPRING_BOOT
 	 
 # Step 2:ECR Repository for Angular appication 
 aws ecr create-repository \
@@ -19,4 +22,4 @@ aws ecr create-repository \
 aws ecr get-login-password \
    --region us-west-2 | docker login \
    --username AWS \
-   --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/eks-angular-poc
+   --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$REPO_SPRING_BOOT
