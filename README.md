@@ -9,10 +9,11 @@
   0_cloudFormation_amazon-eks-vpc-private-subnets.yaml
   ```  
 - Create ECR Repository and authenticate Docker
-
   Repository name : **spring-boot-postgres-poc**
+  
   Repository name : **eks-angular-poc**
-  update script placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and Execute below script
+  
+  - [x] Update script placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and Execute below script
   ```
   ./1-infra-creation/5_ecr-springboot-angular.sh
   ```  
@@ -58,7 +59,7 @@ CloudFormation Template:
 ```
 
 **Test Cluster**
- - [x] Note : install aws cli and install kubectl on your local machine
+ - [x] **Note : install aws cli and install kubectl on your local machine**
 ```
 aws  eks --region us-west-2 update-kubeconfig --name eks-cluster
 kubectl get svc
