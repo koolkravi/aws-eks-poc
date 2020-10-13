@@ -9,11 +9,11 @@
   0_cloudFormation_amazon-eks-vpc-private-subnets.yaml
   ```  
 - Create ECR Repository and authenticate Docker
-  Repository name : **spring-boot-postgres-poc**
-  
+
+  Repository name : **spring-boot-postgres-poc**  
   Repository name : **eks-angular-poc**
   
-  - [x] Update script placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and Execute below script
+  - [x] **Update script placeholder XXXXXXXXXXXX with AWS ACCOUNT ID and Execute below script**
   ```
   ./1-infra-creation/5_ecr-springboot-angular.sh
   ```  
