@@ -13,7 +13,7 @@ docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$REPO_ANGULAR:$V
 docker push  $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$REPO_ANGULAR:$VERSION
 
 # Step 4: Deploy application to EKS 
-kubectl apply -f manifest/angular-app.yaml
+kubectl apply -f k8s-manifest/angular-app.yaml
 
 # Step 5 : LoadBalancer (External URL)
 POD=$(kubectl get svc -l app=eks-angular-poc-loadbalancer | grep LoadBalancer | awk '{print $4}')

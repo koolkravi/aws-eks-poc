@@ -16,7 +16,7 @@ docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$REPO_SPRING_BOO
 docker push  $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$REPO_SPRING_BOOT:$VERSION
 
 # Step 4: Deploy application to EKS 
-kubectl apply -f manifest/spring-boot-app.yaml
+kubectl apply -f k8s-manifest/spring-boot-app.yaml
 
 # Step 5 : LoadBalancer (External URL)
 POD=$(kubectl get svc -l app=eks-springboot-poc | grep LoadBalancer | awk '{print $4}')
